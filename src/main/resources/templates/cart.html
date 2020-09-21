@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Cart</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{navigation :: navigation_panel(Cart)}"/>
+
+    <h1 th:text="#{nav.cart}"></h1>
+    <div th:if="${@cart.items.size() != 0}">
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>Название</td>
+                <td>Цена</td>
+                <td>Количество</td>
+                <td>Операции</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="i : ${@cart.items}">
+                <td th:text="${i.product.title}"></td>
+                <td th:text="${i.price}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{'/cart/decrement/' + ${i.product.id}}">-</a>
+                    <span th:text="'  ' + ${i.quantity} + '  '"/>
+                    <a class="btn btn-primary" th:href="@{'/cart/add/' + ${i.product.id}}">+</a>
+                </td>
+                <td><a class="btn btn-danger" th:href="@{'/cart/remove/' + ${i.product.id}}">Удалить</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <h4 th:text="'Итого: ' + ${@cart.getPrice()} + ' руб.'"></h4>
+        <a class="btn btn-primary" th:href="@{'/orders/create'}" th:if="${@cart.items.size() > 0}">Оформить заказ</a>
+
+    </div>
+    <div th:if="${@cart.items.size() == 0}">
+        <h4>На данный момент Ваша корзина пуста.</h4>
+        <a class="btn btn-primary" th:href="@{'/products'}" role="button">Выбрать товары</a>
+    </div>
+
+</div>
+</body>
+</html>

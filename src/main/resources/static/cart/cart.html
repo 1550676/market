@@ -1,0 +1,39 @@
+<div class="container">
+    <div ng-hide="isCartEmpty()">
+        <h2>Выбранные товары</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>Название</td>
+                <td>Цена</td>
+                <td>Количество</td>
+                <td>Операции</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="orderItemDto in cartList">
+                <td>{{orderItemDto.productTitle}}</td>
+                <td>{{orderItemDto.price}}</td>
+                <td>
+                    <div class="form-group">
+                        <a class="btn btn-primary" ng-click="decrementProductInCart(orderItemDto.productId)"
+                           role="button">-</a>
+                        <label>{{orderItemDto.quantity}}</label>
+                        <a class="btn btn-primary" ng-click="addProductInCart(orderItemDto.productId)"
+                           role="button">+</a>
+                    </div>
+                </td>
+                <td><a class="btn btn-danger" ng-click="deleteProductFromCart(orderItemDto.productId)">Удалить</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h4>Итого выбрано товаров на {{cartPrice}} руб.</h4>
+<!--        <a class="btn btn-primary" th:href="@{'/orders/create'}" th:if="${@cart.items.size() > 0}">Оформить заказ</a>-->
+    </div>
+    <div ng-show="isCartEmpty()">
+        <h4>На данный момент Вы не выбрали ни одного товара</h4>
+        <a class="btn btn-primary" href="#!/store" role="button">Перейти к выбору товаров</a>
+    </div>
+
+</div>

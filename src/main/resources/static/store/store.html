@@ -1,0 +1,70 @@
+<div>
+
+<h2>Фильтры:</h2>
+<form name="productsFilters" novalidate>
+    <div class="form-group">
+        <label>Название</label>
+        <input id="subTitle" type="text" ng-model="filters.subTitle"
+               class="form-control form-control-sm">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Максимальная цена</label>
+            <input id="maxPrice" type="number" ng-model="filters.maxPrice"
+                   class="form-control form-control-sm">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Минимальная цена</label>
+            <input id="minPrice" type="number" ng-model="filters.minPrice"
+                   class="form-control form-control-sm">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Категории</label>
+        <div class="form-check" ng-repeat="c in categories">
+            <input id="{{c.title}}" class="form-check-input" type="checkbox"
+                   ng-click="selectCategory(c.id)"/>
+            <label class="form-check-label">{{c.title}}</label>
+        </div>
+    </div>
+    <div>
+        <button type="submit" ng-click="submitFilters()" class="btn btn-primary">Применить фильтр</button>
+        <button type="submit" ng-click="cancelFilters()" class="btn btn-primary">Отменить фильтр</button>
+    </div>
+</form>
+
+
+<h2>Список товаров:</h2>
+<table class="table table-hover" cellpadding="0" cellspacing="0">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Название</td>
+            <td>Цена</td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="p in ProductsList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.price}}</td>
+            <td><a href="#!/product_edit?id={{p.id}}">Редактировать</a></td>
+            <td>
+                <button type="submit" ng-click="deleteProduct(p.id)" class="btn btn-primary">Удалить</button>
+            </td>
+            <td>
+                <button type="submit" ng-click="addProductInCart(p.id)" class="btn btn-primary">В корзину</button>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</table>
+</div>
+</div>

@@ -1,0 +1,28 @@
+<div>
+    <h2>Создать или внести изменения в товар</h2>
+    <form name="addProductForm" novalidate>
+        <div class="form-group">
+            <label>Title</label>
+            <input hidden type="text" ng-model="productForm.id">
+            <input id="npTitle" type="text" ng-model="productForm.title" class="form-control form-control-sm"/>
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input id="npPrice" type="number" ng-model="productForm.price" class="form-control form-control-sm"/>
+        </div>
+        <div class="form-group">
+            <label>Категории</label>
+            <div ng-repeat="c in categories">
+
+                <div class="form-check">
+                    <input id="'add_'+{{c.title}}" class="form-check-input" type="checkbox" ng-model="c.selected"
+                           ng-true-value="'yes'" ng-false-value="'no'" ng-click="productFormCategoryAdd(c)">
+                    <label class="form-check-label">{{c.title}}</label>
+                </div>
+            </div>
+            <button type="submit" ng-click="createOrUpdateProduct(categories)" class="btn btn-primary">Применить
+                изменения
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Market</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{navigation :: navigation_panel(Users)}"/>
+
+    <h2>Пользователи</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Телефон</td>
+            <td>Доступ</td>
+            <td>Операции</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="u : ${users.getContent()}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.phone}"></td>
+            <td th:text="${u.enable}"></td>
+            <td><a th:href="@{'/users/edit/' + ${u.id}}">Редактировать</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${users.isFirst() ? 'disabled' : ''}">
+                <a class="page-link"
+                   th:href="@{'/products/?p='+ ${users.previousOrFirstPageable().getPageNumber() + 1}}">Назад</a>
+            </li>
+
+            <li class="page-item" th:classappend="${users.getNumber() + 1 == i ? 'active' : ''}"
+                th:each="i : ${#numbers.sequence((users.getNumber() + 1 > 2 ? users.getNumber() - 1 : 1), (users.getNumber() + 3 < users.getTotalPages() ? users.getNumber() + 3 : users.getTotalPages()) )}">
+                <a class="page-link" th:text="${i}" th:href="@{'/users/?p=' + ${i}}"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${users.isLast() ? 'disabled' : ''}">
+                <a class="page-link"
+                   th:href="@{'/users/?p='+ ${users.nextOrLastPageable().getPageNumber() + 1}}">Вперед</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 public class JwtResponse {
-    private Date data;
+    private List<String> roleList;
     private String token;
 
 }

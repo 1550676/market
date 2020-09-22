@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.zakharova.elena.market.entities.Category;
 import ru.zakharova.elena.market.entities.Product;
 import ru.zakharova.elena.market.entities.dtos.ProductDto;
-import ru.zakharova.elena.market.exceptions.ErrorWrapper;
-import ru.zakharova.elena.market.exceptions.ProductNotFoundException;
+import ru.zakharova.elena.market.exceptions.MarketError;
+import ru.zakharova.elena.market.exceptions.ResourceNotFoundException;
 import ru.zakharova.elena.market.services.CategoriesService;
 import ru.zakharova.elena.market.services.ProductsService;
 import ru.zakharova.elena.market.utils.ProductFilter;
@@ -55,7 +55,7 @@ public class RestProductsController {
     @ApiOperation("Returns one product by id")
     public ResponseEntity<?> getOneProduct(@PathVariable @ApiParam("Id of the product to be requested. Cannot be empty") Long id) {
         if (!productsService.existsById(id)) {
-            return new ResponseEntity<>(new ErrorWrapper(HttpStatus.NOT_FOUND.value(), "Product not found, id: " + id), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new MarketError(HttpStatus.NOT_FOUND.value(), "Product not found, id: " + id), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(productsService.findById(id).get(), HttpStatus.OK);
     }
@@ -70,7 +70,7 @@ public class RestProductsController {
     @ApiOperation("Removes one product by id")
     public ResponseEntity<?> deleteOneProducts(@PathVariable Long id) {
         if (!productsService.existsById(id)) {
-            return new ResponseEntity<>(new ErrorWrapper(HttpStatus.NOT_FOUND.value(), "Product not found, id: " + id), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new MarketError(HttpStatus.NOT_FOUND.value(), "Product not found, id: " + id), HttpStatus.NOT_FOUND);
         }
         productsService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -91,10 +91,10 @@ public class RestProductsController {
     @ApiOperation("Modifies an existing product")
     public ResponseEntity<?> modifyProduct(@RequestBody Product product) {
         if (product.getId() == null || !productsService.existsById(product.getId())) {
-            throw new ProductNotFoundException("Product not found, id: " + product.getId());
+            throw new ResourceNotFoundException("Product not found, id: " + product.getId());
         }
         if (product.getPrice().doubleValue() < 0.0) {
-            return new ResponseEntity<>(new ErrorWrapper(HttpStatus.BAD_REQUEST.value(), "Product's price can not be negative"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MarketError(HttpStatus.BAD_REQUEST.value(), "Product's price can not be negative"), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(productsService.saveOrUpdate(product), HttpStatus.OK);
     }

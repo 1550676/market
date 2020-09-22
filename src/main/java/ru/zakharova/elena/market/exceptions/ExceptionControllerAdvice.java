@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionControllerAdvice {
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorWrapper> exceptionHandler() {
-        ErrorWrapper error = new ErrorWrapper(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Please contact your administrator");
+    public ResponseEntity<MarketError> exceptionHandler() {
+        MarketError error = new MarketError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Please contact your administrator");
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

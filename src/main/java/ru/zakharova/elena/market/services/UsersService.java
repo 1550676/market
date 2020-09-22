@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.zakharova.elena.market.entities.Role;
 import ru.zakharova.elena.market.entities.User;
 import ru.zakharova.elena.market.entities.dtos.SystemUser;
-import ru.zakharova.elena.market.exceptions.UserNotFoundException;
+import ru.zakharova.elena.market.exceptions.ResourceNotFoundException;
 import ru.zakharova.elena.market.repositories.UsersRepository;
 
 import java.util.Arrays;
@@ -67,7 +67,7 @@ public class UsersService implements UserDetailsService {
     }
 
     public User findById(Long id) {
-        return usersRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Can't found user with id = " + id));
+        return usersRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Can't found user with id = " + id));
     }
 
     public User saveOrUpdate(User user) {

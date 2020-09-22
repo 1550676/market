@@ -32,7 +32,7 @@ public class AuthControllerIntegrationTests {
         System.out.println(response);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(jwtResponse, is(instanceOf(JwtResponse.class)));
-        assertThat(jwtResponse.getData(), is(notNullValue()));
+        assertThat(jwtResponse.getRoleList(), is(notNullValue()));
         assertThat(jwtResponse.getToken(), is(notNullValue()));
 
     }

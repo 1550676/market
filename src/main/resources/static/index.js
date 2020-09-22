@@ -13,9 +13,14 @@
                     .then(function successCallback(response) {
                         if (response.data.token) {
                             $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                            $localStorage.currentUser = {username: $scope.user.username, token: response.data.token};
+                            $localStorage.currentUser = {
+                                username: $scope.user.username,
+                                token: response.data.token,
+                                roleList: response.data.roleList
+                            };
                             $scope.user.username = null;
                             $scope.user.password = null;
+                            $scope.user.roleList = null;
                             window.location.reload(true);
                             console.log($localStorage.currentUser);
                         }
@@ -32,6 +37,9 @@
                 }
                 if ($scope.user.password) {
                     $scope.user.password = null;
+                }
+                if ($scope.user.roleList) {
+                    $scope.user.roleList = null;
                 }
                 $location.path("/about");
             };
@@ -67,7 +75,15 @@
             .when('/cart', {
                 templateUrl: 'cart/cart.html',
                 controller: 'cartController'
-            });
+            })
+            .when('/order', {
+                templateUrl: 'order/order.html',
+                controller: 'orderController'
+            })
+            .when('/registration', {
+            templateUrl: 'registration/registration.html',
+            controller: 'registrationController'
+        });
 
         $httpProvider.interceptors.push(function ($q) {
             return {

@@ -1,4 +1,4 @@
-angular.module('app').controller('cartController', function ($scope, $http, $localStorage) {
+angular.module('app').controller('cartController', function ($scope, $http, $location) {
     const contextPath = 'http://localhost:8189/market';
 
     fillTable = function () {

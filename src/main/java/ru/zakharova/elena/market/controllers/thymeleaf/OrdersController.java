@@ -32,7 +32,7 @@ public class OrdersController {
     public String confirmOrder(Principal principal, @RequestParam String address, @RequestParam String phone) {
         User user = usersService.findByPhone(principal.getName()).get();
         Order order = new Order(user, cart, phone, address);
-        order = ordersService.saveOrder(order);
+        order = ordersService.save(order);
         return "order_results";
     }
 }

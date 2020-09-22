@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.zakharova.elena.market.beans.Cart;
 import ru.zakharova.elena.market.entities.Product;
 import ru.zakharova.elena.market.entities.dtos.OrderItemDto;
-import ru.zakharova.elena.market.exceptions.ProductNotFoundException;
+import ru.zakharova.elena.market.exceptions.ResourceNotFoundException;
 import ru.zakharova.elena.market.services.OrderItemsService;
 import ru.zakharova.elena.market.services.ProductsService;
 
@@ -28,7 +28,7 @@ public class RestCartController {
 
     @GetMapping("/{productId}")
     public void addProductInCartById(@PathVariable Long productId) {
-        Product product = productsService.findById(productId).orElseThrow(() -> new ProductNotFoundException("Unable to add product (id = " + productId + " ) to cart. Product is not found"));
+        Product product = productsService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Unable to add product (id = " + productId + " ) to cart. Product is not found"));
         cart.add(product);
     }
 

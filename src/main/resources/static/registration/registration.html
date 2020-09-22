@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Подтверждение заказа</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Название</td>
+            <td>Количество</td>
+            <td>Цена</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="orderItemDto in cartList">
+            <td>{{orderItemDto.productTitle}}</td>
+            <td>{{orderItemDto.price}}</td>
+            <td>{{orderItemDto.quantity}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <h4>Итого выбрано товаров на {{cartPrice}} руб.</h4>
+
+    <form method="post" name="answerForm" ng-submit="tryToOrderConfirm()">
+        <div class="form-group">
+            <label>Введите адрес доставки</label>
+            <input class="form-control form-control-sm" name="address" ng-model="address" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Подтвердить заказ</button>
+    </form>
+</div>

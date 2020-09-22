@@ -9,13 +9,13 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import ru.zakharova.elena.market.exceptions.ErrorWrapper;
+import ru.zakharova.elena.market.exceptions.MarketError;
 import ru.zakharova.elena.market.utils.jwt.JwtRequest;
 import ru.zakharova.elena.market.utils.jwt.JwtResponse;
 import ru.zakharova.elena.market.beans.jwt.JwtTokenUtil;
 import ru.zakharova.elena.market.services.UsersService;
 
-import java.util.Date;
+import java.util.List;
 
 
 @Profile({"ws", "rest", "test"})
@@ -38,11 +38,12 @@ public class RestAuthController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(new ErrorWrapper(HttpStatus.UNAUTHORIZED.value(), "Incorrect username or password"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new MarketError(HttpStatus.UNAUTHORIZED.value(), "Incorrect username or password"), HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = usersService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse( new Date(), token));
+        List<String> roleList = jwtTokenUtil.getRoleList(userDetails);
+        return ResponseEntity.ok(new JwtResponse(roleList, token));
     }
 
 }

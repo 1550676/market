@@ -4,7 +4,7 @@
     <xs:element name="getProductRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
+                <xs:element name="titlePart"  type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -33,7 +33,5 @@
             <xs:element name="discount" type="xs:int"/>
         </xs:sequence>
     </xs:complexType>
-
-
 
 </xs:schema>

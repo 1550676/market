@@ -10,17 +10,17 @@ angular.module('app').controller('registrationController', function ($scope, $ht
             firstName: "222",
             lastName: "222",
             email: "222"
-        };
+        }};
 
 
-            $http.post(contextPath + '/registration', $scope.systemUser)
-                .then(function successCallback(response) {
-                    fieldErrors = response.data.fieldErrors;
-                    console.log(fieldErrors);
-                    console.log(response.data.fieldErrors);
-                    }, function errorCallback(response) {
-                    console.log(response.data);
-                    }
-                );
-        };
+        //     $http.post(contextPath + '/registration', $scope.systemUser)
+        //         .then(function successCallback(response) {
+        //             fieldErrors = response.data.fieldErrors;
+        //             console.log(fieldErrors);
+        //             console.log(response.data.fieldErrors);
+        //             }, function errorCallback(response) {
+        //             console.log(response.data);
+        //             }
+        //         );
+        // };
 });

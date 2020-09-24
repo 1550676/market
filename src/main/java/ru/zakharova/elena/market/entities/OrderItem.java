@@ -1,6 +1,7 @@
 package ru.zakharova.elena.market.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "orders_items")
 @Data
+@NoArgsConstructor
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,8 +8,8 @@
 
 package ru.zakharova.elena.market.utils.ws;
 
-import ru.zakharova.elena.market.entities.Category;
-import ru.zakharova.elena.market.entities.Product;
+import ru.zakharova.elena.market.entities.dtos.CategoryDTO;
+import ru.zakharova.elena.market.entities.dtos.ProductDTO;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -56,19 +56,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Product }
+     * Create an instance of {@link ProductDTO }
      *
      */
-    public Product createProduct() {
-        return new Product();
+    public ProductDTO createProduct() {
+        return new ProductDTO();
     }
 
     /**
-     * Create an instance of {@link Category }
+     * Create an instance of {@link CategoryDTO }
      *
      */
-    public Category createCategory() {
-        return new Category();
+    public CategoryDTO createCategory() {
+        return new CategoryDTO();
     }
 
 }

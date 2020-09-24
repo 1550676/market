@@ -2,6 +2,7 @@ package ru.zakharova.elena.market.controllers.rest;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.zakharova.elena.market.beans.Cart;
@@ -22,7 +23,7 @@ public class RestOrderController {
     private UsersService usersService;
     private Cart cart;
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createOrder(Principal principal, @RequestBody String address) {
         try {
             User user = usersService.getUserByUsername(principal.getName());

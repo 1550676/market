@@ -8,41 +8,24 @@
 
 package ru.zakharova.elena.market.utils.ws;
 
+import org.springframework.stereotype.Component;
 import ru.zakharova.elena.market.entities.Product;
+import ru.zakharova.elena.market.entities.dtos.ProductDTO;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * <p>Java class for anonymous complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="product" type="{http://www.zakharova-elena.com/spring/ws/products}product" maxOccurs="unbounded"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
- * 
- * 
- */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "product"
+        "productDTOs"
 })
 @XmlRootElement(name = "getProductResponse")
+@Component
 public class GetProductResponse {
 
     @XmlElement(required = true)
-    protected List<Product> product;
+    protected List<ProductDTO> productDTOs;
 
     /**
      * Gets the value of the product property.
@@ -62,15 +45,15 @@ public class GetProductResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Product }
+     * {@link ProductDTO }
      * 
      * 
      */
-    public List<Product> getProduct() {
-        if (product == null) {
-            product = new ArrayList<>();
+    public List<ProductDTO> getProductDTOs() {
+        if (productDTOs == null) {
+            productDTOs = new ArrayList<>();
         }
-        return this.product;
+        return this.productDTOs;
     }
 
 }

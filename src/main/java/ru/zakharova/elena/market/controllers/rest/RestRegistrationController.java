@@ -3,6 +3,7 @@ package ru.zakharova.elena.market.controllers.rest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -32,7 +33,7 @@ public class RestRegistrationController {
     }
 
 
-    @PostMapping()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public SystemUser processRegistrationForm(@Validated @RequestBody SystemUser systemUser) {
         Optional<User> existing = usersService.findByPhone(systemUser.getPhone());
         if (existing.isPresent()) {

@@ -1,6 +1,7 @@
 package ru.zakharova.elena.market.controllers.rest;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.zakharova.elena.market.beans.Cart;
 import ru.zakharova.elena.market.entities.Product;
@@ -21,7 +22,7 @@ public class RestCartController {
     private ProductsService productsService;
     private Cart cart;
 
-    @GetMapping(produces = "application/json")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderItemDto> getAllOrderItemDto() {
         return orderItemsService.mapEntityListToDtoList(cart.getItems());
     }
@@ -43,7 +44,7 @@ public class RestCartController {
         cart.decrement(product);
     }
 
-    @GetMapping(value = "/price", produces = "application/json")
+    @GetMapping(value = "/price", produces = MediaType.APPLICATION_JSON_VALUE)
     public BigDecimal getPriceOfCart() {
         return cart.getPrice();
     }

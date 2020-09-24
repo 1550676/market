@@ -101,7 +101,7 @@ values
 insert into users (phone, password, enable, first_name, last_name, email)
 values
 ('2','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'true', 'admin','admin','admin@gmail.com'),
-('100','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'false', 'user','user','user@gmail.com');
+('100','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'true', 'user','user','user@gmail.com');
 
 
 insert into users_roles (user_id, role_id)

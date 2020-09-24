@@ -8,37 +8,21 @@
 
 package ru.zakharova.elena.market.utils.ws;
 
+import org.springframework.stereotype.Component;
+
 import javax.xml.bind.annotation.*;
 
 
-/**
- * <p>Java class for anonymous complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
- * 
- * 
- */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "name"
+        "titlePart"
 })
 @XmlRootElement(name = "getProductRequest")
+@Component
 public class GetProductRequest {
 
     @XmlElement(required = true)
-    protected String name;
+    protected String titlePart;
 
     /**
      * Gets the value of the name property.
@@ -48,8 +32,8 @@ public class GetProductRequest {
      *     {@link String }
      *     
      */
-    public String getName() {
-        return name;
+    public String getTitlePart() {
+        return titlePart;
     }
 
     /**
@@ -60,8 +44,8 @@ public class GetProductRequest {
      *     {@link String }
      *     
      */
-    public void setName(String value) {
-        this.name = value;
+    public void setTitlePart(String value) {
+        this.titlePart = value;
     }
 
 }

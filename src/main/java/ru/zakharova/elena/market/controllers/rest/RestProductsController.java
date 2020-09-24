@@ -5,11 +5,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.zakharova.elena.market.entities.Category;
 import ru.zakharova.elena.market.entities.Product;
-import ru.zakharova.elena.market.entities.dtos.ProductDto;
+import ru.zakharova.elena.market.entities.dtos.ProductDTO;
+import ru.zakharova.elena.market.entities.dtos.mappers.ProductMapper;
 import ru.zakharova.elena.market.exceptions.MarketError;
 import ru.zakharova.elena.market.exceptions.ResourceNotFoundException;
 import ru.zakharova.elena.market.services.CategoriesService;
@@ -33,31 +35,26 @@ public class RestProductsController {
         this.categoriesService = categoriesService;
     }
 
-    @GetMapping("/dto")
-    @ApiOperation("Returns list of all products data transfer objects")
-    public List<ProductDto> getAllProductsDto() {
-        return productsService.getDtoData();
-    }
-
-    @GetMapping(produces = "application/json")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Returns list of all products")
-    public List<Product> getAllProducts(@RequestParam Map<String, String> requestParams,
+    public List<ProductDTO> getAllProducts(@RequestParam Map<String, String> requestParams,
                                         @RequestParam(value = "category" , required = false) List<Long> chosenCategoriesId) {
         List<Category> chosenCategoriesList = null;
         if (chosenCategoriesId != null) {
             chosenCategoriesList = categoriesService.getCategoriesByIds(chosenCategoriesId);
         }
         ProductFilter productFilter = new ProductFilter(requestParams, chosenCategoriesList);
-        return productsService.findAll(productFilter.getSpec());
+        return ProductMapper.PRODUCT_MAPPER.fromProductList(productsService.findAll(productFilter.getSpec()));
     }
 
-    @GetMapping(value = "/{id}", produces = "application/json")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Returns one product by id")
     public ResponseEntity<?> getOneProduct(@PathVariable @ApiParam("Id of the product to be requested. Cannot be empty") Long id) {
         if (!productsService.existsById(id)) {
             return new ResponseEntity<>(new MarketError(HttpStatus.NOT_FOUND.value(), "Product not found, id: " + id), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(productsService.findById(id).get(), HttpStatus.OK);
+        Product product = productsService.findById(id).get();
+        return new ResponseEntity<>(ProductMapper.PRODUCT_MAPPER.fromProduct(product), HttpStatus.OK);
     }
 
     @DeleteMapping
@@ -76,18 +73,17 @@ public class RestProductsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation("Creates a new product")
     public Product saveNewProduct(@RequestBody Product product) {
-        System.out.println(product);
         if (product.getId() != null) {
             product.setId(null);
         }
         return productsService.saveOrUpdate(product);
     }
 
-    @PutMapping(consumes = "application/json", produces = "application/json")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Modifies an existing product")
     public ResponseEntity<?> modifyProduct(@RequestBody Product product) {
         if (product.getId() == null || !productsService.existsById(product.getId())) {

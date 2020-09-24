@@ -41,8 +41,8 @@ public class ProductsControllerUnitTests {
 
     // @Test
     public void givenProduct_whenAdd_thenStatus201andProductReturned() throws Exception {
-        Product product = new Product(1L, "Cheese", new BigDecimal(320), new ArrayList<>(), new ArrayList<>());
-        Mockito.when(productsService.saveOrUpdate(any())).thenReturn(product);
+        Product product = new Product(1L, "Cheese", new BigDecimal(320), new ArrayList<>());
+        Mockito.when(productsService.saveOrUpdate((Product) any())).thenReturn(product);
         mockMvc.perform(
                 post("/api/v1/products")
                         .content(objectMapper.writeValueAsString(product))
@@ -53,14 +53,12 @@ public class ProductsControllerUnitTests {
                 .andExpect(jsonPath("$.title").value("Cheese"))
                 .andExpect(jsonPath("$.price").value(320.00))
                 .andExpect(jsonPath("$.categories").isArray())
-                .andExpect(jsonPath("$.categories").isEmpty())
-                .andExpect(jsonPath("$.items").isEmpty())
-                .andExpect(jsonPath("$.items").isArray());
+                .andExpect(jsonPath("$.categories").isEmpty());
     }
 
    // @Test
     public void givenId_whenGetExistingProduct_thenStatus200andProductReturned() throws Exception {
-        Product product = new Product(1L, "Cheese", new BigDecimal(320), new ArrayList<>(), new ArrayList<>());
+        Product product = new Product(1L, "Cheese", new BigDecimal(320), new ArrayList<>());
         Mockito.when(productsService.findById(any()).get()).thenReturn(product);
         Mockito.when(productsService.existsById(any())).thenReturn(true);
         mockMvc.perform(
@@ -70,9 +68,7 @@ public class ProductsControllerUnitTests {
                 .andExpect(jsonPath("$.title").value("Cheese"))
                 .andExpect(jsonPath("$.price").value(320.00))
                 .andExpect(jsonPath("$.categories").isArray())
-                .andExpect(jsonPath("$.categories").isEmpty())
-                .andExpect(jsonPath("$.items").isEmpty())
-                .andExpect(jsonPath("$.items").isArray());
+                .andExpect(jsonPath("$.categories").isEmpty());
     }
 
 
@@ -89,8 +85,8 @@ public class ProductsControllerUnitTests {
 
     @Test
     public void giveProduct_whenUpdate_thenStatus200andUpdatedReturns() throws Exception {
-        Product product = new Product(1L, "Cheese", new BigDecimal(320), new ArrayList<>(), new ArrayList<>());
-        Mockito.when(productsService.saveOrUpdate(any())).thenReturn(product);
+        Product product = new Product(1L, "Cheese", new BigDecimal(320), new ArrayList<>());
+        Mockito.when(productsService.saveOrUpdate((Product) any())).thenReturn(product);
         Mockito.when(productsService.existsById(any())).thenReturn(true);
         mockMvc.perform(
                 put("/api/v1/products")
@@ -102,9 +98,7 @@ public class ProductsControllerUnitTests {
                 .andExpect(jsonPath("$.title").value("Cheese"))
                 .andExpect(jsonPath("$.price").value(320.00))
                 .andExpect(jsonPath("$.categories").isArray())
-                .andExpect(jsonPath("$.categories").isEmpty())
-                .andExpect(jsonPath("$.items").isEmpty())
-                .andExpect(jsonPath("$.items").isArray());
+                .andExpect(jsonPath("$.categories").isEmpty());
     }
 
     @Test
@@ -117,8 +111,8 @@ public class ProductsControllerUnitTests {
 
     @Test
     public void givenNothing_whenGetAllProducts_thenStatus200() throws Exception {
-        Product p1 = new Product(1L, "Cheese", new BigDecimal(320), new ArrayList<>(), new ArrayList<>());
-        Product p2 = new Product(2L, "Milk", new BigDecimal(80), new ArrayList<>(), new ArrayList<>());
+        Product p1 = new Product(1L, "Cheese", new BigDecimal(320), new ArrayList<>());
+        Product p2 = new Product(2L, "Milk", new BigDecimal(80), new ArrayList<>());
         List<Product> productList = Arrays.asList(p1, p2);
         Mockito.when(productsService.findAll(any())).thenReturn(productList);
         mockMvc.perform(

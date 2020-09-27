@@ -1,10 +1,14 @@
 package ru.zakharova.elena.market.entities;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,15 +24,15 @@ public class Product {
     @Column(name = "id")
     private Long id;
 
-    //@NotNull(message = "price is required")
     @Column(name = "title")
+    @Size(min = 4, max = 255)
     private String title;
 
-    //@NotNull(message = "price is required")
+    @NotNull(message = "price is required")
     @Column(name = "price")
     private BigDecimal price;
 
-    //@NotNull(message = "price is required")
+    @NotNull(message = "category is required")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "products_categories",

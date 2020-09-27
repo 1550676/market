@@ -1,4 +1,4 @@
-package ru.zakharova.elena.market.entities.dtos.mappers;
+package ru.zakharova.elena.market.utils.mappers;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -12,14 +12,14 @@ import java.util.List;
 public interface ProductMapper {
     ProductMapper PRODUCT_MAPPER = Mappers.getMapper(ProductMapper.class);
 
-    @Mapping(source = "categoryDTOS", target = "categories")
+    @Mapping(source = "categoriesDTOs", target = "categories")
     Product toProduct(ProductDTO productDTO);
 
-    List<Product> toProductList(List<ProductDTO> productDTOS);
+    List<Product> toProductsList(List<ProductDTO> productsDTOs);
 
     @InheritInverseConfiguration
     ProductDTO fromProduct(Product product);
 
-    List<ProductDTO> fromProductList(List<Product> products);
+    List<ProductDTO> fromProductsList(List<Product> products);
 }
 

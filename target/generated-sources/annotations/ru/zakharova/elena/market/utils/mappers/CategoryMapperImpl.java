@@ -1,4 +1,4 @@
-package ru.zakharova.elena.market.entities.dtos.mappers;
+package ru.zakharova.elena.market.utils.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import ru.zakharova.elena.market.entities.dtos.CategoryDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-24T00:28:11+0300",
+    date = "2020-09-25T15:50:21+0300",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 11.0.8 (JetBrains s.r.o.)"
 )
 public class CategoryMapperImpl implements CategoryMapper {
@@ -44,13 +44,13 @@ public class CategoryMapperImpl implements CategoryMapper {
     }
 
     @Override
-    public List<Category> toCategoryList(List<CategoryDTO> categoryDTOS) {
-        if ( categoryDTOS == null ) {
+    public List<Category> toCategoriesList(List<CategoryDTO> categoriesDTOs) {
+        if ( categoriesDTOs == null ) {
             return null;
         }
 
-        List<Category> list = new ArrayList<Category>( categoryDTOS.size() );
-        for ( CategoryDTO categoryDTO : categoryDTOS ) {
+        List<Category> list = new ArrayList<Category>( categoriesDTOs.size() );
+        for ( CategoryDTO categoryDTO : categoriesDTOs ) {
             list.add( toCategory( categoryDTO ) );
         }
 
@@ -58,7 +58,7 @@ public class CategoryMapperImpl implements CategoryMapper {
     }
 
     @Override
-    public List<CategoryDTO> fromCategoryList(List<Category> categories) {
+    public List<CategoryDTO> fromCategoriesList(List<Category> categories) {
         if ( categories == null ) {
             return null;
         }

@@ -8,6 +8,10 @@
 
 package ru.zakharova.elena.market.entities.dtos;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,115 +21,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * <p>Java class for product complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="product"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
- *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}decimal"/&gt;
- *         &lt;element name="categories" type="{http://www.geekbrains.com/spring/ws/products}category" maxOccurs="unbounded"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
- * 
- * 
- */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "product", propOrder = {
     "id",
     "title",
     "price",
-        "categoryDTOS"
+    "categoriesDTOs"
 })
 public class ProductDTO {
 
-    protected Long id;
-    @XmlElement(required = true)
-    protected String title;
-    @XmlElement(required = true)
-    protected BigDecimal price;
-    @XmlElement(required = true)
-    protected List<CategoryDTO> categoryDTOS;
+    private Long id;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     */
+    @XmlElement(required = true)
+    @Size(min = 4, max = 255)
+    private String title;
+
+    @XmlElement(required = true)
+    private BigDecimal price;
+
+    @XmlElement(required = true)
+    private List<CategoryDTO> categoriesDTOs;
+
     public Long getId() {
         return id;
     }
 
-    /**
-     * Sets the value of the id property.
-     *
-     * @param value
-     */
     public void setId(Long value) {
         this.id = value;
     }
 
-    /**
-     * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
     public String getTitle() {
         return title;
     }
 
-    /**
-     * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
     public void setTitle(String value) {
         this.title = value;
     }
 
-    /**
-     * Gets the value of the price property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
-     */
     public BigDecimal getPrice() {
         return price;
     }
 
-    /**
-     * Sets the value of the price property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
-     */
     public void setPrice(BigDecimal value) {
         this.price = value;
     }
 
-    public List<CategoryDTO> getCategoryDTOS() {
-        if (categoryDTOS == null) {
-            categoryDTOS = new ArrayList<>();
+    public List<CategoryDTO> getCategoriesDTOs() {
+        if (categoriesDTOs == null) {
+            categoriesDTOs = new ArrayList<>();
         }
-        return this.categoryDTOS;
+        return this.categoriesDTOs;
     }
 
 }

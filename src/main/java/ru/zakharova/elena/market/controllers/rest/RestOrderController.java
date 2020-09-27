@@ -25,13 +25,9 @@ public class RestOrderController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createOrder(Principal principal, @RequestBody String address) {
-        try {
             User user = usersService.getUserByUsername(principal.getName());
             Order order = new Order(user, cart, principal.getName(), address);
             ordersService.save(order);
             return new ResponseEntity<>(new MarketError(HttpStatus.OK.value(), "Ваш заказ успешно сформирован!"), HttpStatus.OK);
-        }catch (Exception e) {
-            return new ResponseEntity<>(new MarketError(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 }

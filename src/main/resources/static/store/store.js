@@ -1,17 +1,13 @@
-angular.module('app').controller('storeController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8189/market';
-    const path = contextPath + '/api/v1/products';
-    // запрашиваем категории
-    $http.get(contextPath + "/api/v1/categories")
-        .then(function (response) {
-            $scope.categories = response.data;
-        });
+angular.module('app').controller('storeController', function ($scope, $http, $localStorage) {
+    const path = $localStorage.contextPath + '/api/v1/products';
+    $scope.categories = $localStorage.categories;
+
     // формируем фильтры
     $scope.filters = {
-        subTitle : '',
-        minPrice : '',
-        maxPrice : '',
-        categoriesIds : []
+        subTitle: '',
+        minPrice: '',
+        maxPrice: '',
+        categoriesIds: []
     }
     // добавляем и удаляем категорию для фильтрации при нажатии на нее
     $scope.selectCategory = function (categoryId) {
@@ -56,11 +52,8 @@ angular.module('app').controller('storeController', function ($scope, $http) {
     };
 
     $scope.addProductInCart = function (id) {
-        $http.get(contextPath + '/api/v1/cart/' + id).then(function () {
+        $http.get($localStorage.contextPath + '/api/v1/cart/' + id).then(function () {
         });
     };
-
-
-
 
 });

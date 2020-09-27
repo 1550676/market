@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.zakharova.elena.market.entities.Product;
 import ru.zakharova.elena.market.entities.dtos.ProductDTO;
-import ru.zakharova.elena.market.entities.dtos.mappers.ProductMapper;
+import ru.zakharova.elena.market.utils.mappers.ProductMapper;
 import ru.zakharova.elena.market.repositories.ProductsRepository;
 
 import java.util.List;
@@ -47,7 +47,11 @@ public class ProductsService {
     }
 
     public List<ProductDTO> findAllDTO() {
-        return ProductMapper.PRODUCT_MAPPER.fromProductList(productsRepository.findAll());
+        return ProductMapper.PRODUCT_MAPPER.fromProductsList(productsRepository.findAll());
+    }
+
+    public List<ProductDTO> findAllDTO(Specification<Product> spec) {
+        return ProductMapper.PRODUCT_MAPPER.fromProductsList(findAll(spec));
     }
 
     public void deleteAll() {

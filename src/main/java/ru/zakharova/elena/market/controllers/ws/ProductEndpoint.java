@@ -7,7 +7,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import ru.zakharova.elena.market.entities.Product;
-import ru.zakharova.elena.market.entities.dtos.mappers.ProductMapper;
+import ru.zakharova.elena.market.utils.mappers.ProductMapper;
 import ru.zakharova.elena.market.repositories.ProductsRepository;
 import ru.zakharova.elena.market.repositories.specifications.ProductSpecifications;
 import ru.zakharova.elena.market.utils.ws.GetProductRequest;
@@ -30,10 +30,10 @@ public class ProductEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getProductRequest")
     @ResponsePayload
     public GetProductResponse getProductsDTOs(@RequestPayload GetProductRequest request) {
-        response.getProductDTOs().clear();
+        response.getProductsDTOs().clear();
         Specification<Product> spec = Specification.where(null);
         spec = spec.and(ProductSpecifications.titleByPart("%" + request.getTitlePart() + "%"));
-        response.getProductDTOs().addAll(ProductMapper.PRODUCT_MAPPER.fromProductList(productsRepository.findAll(spec)));
+        response.getProductsDTOs().addAll(ProductMapper.PRODUCT_MAPPER.fromProductsList(productsRepository.findAll(spec)));
         return response;
     }
 }

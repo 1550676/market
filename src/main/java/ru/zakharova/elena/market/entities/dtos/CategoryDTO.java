@@ -8,6 +8,11 @@
 
 package ru.zakharova.elena.market.entities.dtos;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -21,64 +26,36 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class CategoryDTO {
 
-    protected Long id;
-    @XmlElement(required = true)
-    protected String title;
-    @XmlElement(required = true)
-    protected int discount;
+    private Long id;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     */
+    @XmlElement(required = true)
+    @Size(min = 4, max = 255)
+    private String title;
+
+    @XmlElement(required = true)
+    @Value("0")
+    private int discount;
+
     public Long getId() {
         return id;
     }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     */
     public void setId(Long value) {
         this.id = value;
     }
 
-    /**
-     * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
     public String getTitle() {
         return title;
     }
 
-    /**
-     * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
     public void setTitle(String value) {
         this.title = value;
     }
 
-    /**
-     * Gets the value of the discount property.
-     * 
-     */
     public int getDiscount() {
         return discount;
     }
 
-    /**
-     * Sets the value of the discount property.
-     * 
-     */
     public void setDiscount(int value) {
         this.discount = value;
     }

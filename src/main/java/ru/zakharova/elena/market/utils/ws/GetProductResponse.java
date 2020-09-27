@@ -9,7 +9,6 @@
 package ru.zakharova.elena.market.utils.ws;
 
 import org.springframework.stereotype.Component;
-import ru.zakharova.elena.market.entities.Product;
 import ru.zakharova.elena.market.entities.dtos.ProductDTO;
 
 import javax.xml.bind.annotation.*;
@@ -18,42 +17,20 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "productDTOs"
+        "productsDTOs"
 })
 @XmlRootElement(name = "getProductResponse")
 @Component
 public class GetProductResponse {
 
     @XmlElement(required = true)
-    protected List<ProductDTO> productDTOs;
+    protected List<ProductDTO> productsDTOs;
 
-    /**
-     * Gets the value of the product property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the product property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getProduct().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ProductDTO }
-     * 
-     * 
-     */
-    public List<ProductDTO> getProductDTOs() {
-        if (productDTOs == null) {
-            productDTOs = new ArrayList<>();
+    public List<ProductDTO> getProductsDTOs() {
+        if (productsDTOs == null) {
+            productsDTOs = new ArrayList<>();
         }
-        return this.productDTOs;
+        return this.productsDTOs;
     }
 
 }

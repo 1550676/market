@@ -1,11 +1,7 @@
 angular.module('app').controller('productEditController', function ($scope, $http, $routeParams, $localStorage, $location) {
-    const contextPath = 'http://localhost:8189/market';
-    const path = contextPath + '/api/v1/products';
-    // запрашиваем категории
-    $http.get(contextPath + "/api/v1/categories")
-        .then(function (response) {
-            $scope.categories = response.data;
-        });
+    const path = $localStorage.contextPath + '/api/v1/products';
+    $scope.categories = $localStorage.categories;
+
     // если внесение изменений в товар
     if ($routeParams.id != null) {
         $http.get(path + '/' + $routeParams.id).then(function (response) {

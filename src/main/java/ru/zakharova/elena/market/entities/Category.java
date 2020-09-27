@@ -1,8 +1,12 @@
 package ru.zakharova.elena.market.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.util.List;
@@ -12,6 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,6 +26,7 @@ public class Category {
     private String title;
 
     @Column(name = "discount")
+    @Value("0")
     private int discount;
 
     @ManyToMany

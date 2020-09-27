@@ -5,7 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.zakharova.elena.market.beans.Cart;
 import ru.zakharova.elena.market.entities.Product;
-import ru.zakharova.elena.market.entities.dtos.OrderItemDto;
+import ru.zakharova.elena.market.entities.dtos.OrderItemDTO;
 import ru.zakharova.elena.market.exceptions.ResourceNotFoundException;
 import ru.zakharova.elena.market.services.OrderItemsService;
 import ru.zakharova.elena.market.services.ProductsService;
@@ -23,7 +23,7 @@ public class RestCartController {
     private Cart cart;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<OrderItemDto> getAllOrderItemDto() {
+    public List<OrderItemDTO> getAllOrderItemDto() {
         return orderItemsService.mapEntityListToDtoList(cart.getItems());
     }
 

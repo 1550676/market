@@ -1,4 +1,4 @@
-package ru.zakharova.elena.market.entities.dtos.mappers;
+package ru.zakharova.elena.market.utils.mappers;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -17,8 +17,8 @@ public interface CategoryMapper {
     @InheritInverseConfiguration
     CategoryDTO fromCategory(Category category);
 
-    List<Category> toCategoryList(List<CategoryDTO> categoryDTOS);
+    List<Category> toCategoriesList(List<CategoryDTO> categoriesDTOs);
 
-    List<CategoryDTO> fromCategoryList(List<Category> categories);
+    List<CategoryDTO> fromCategoriesList(List<Category> categories);
 
 }

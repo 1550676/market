@@ -1,0 +1,16 @@
+package ru.zakharova.elena.market.configs;
+
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class RestCustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    @Override
+    public void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException authException) throws IOException {
+        res.sendError(HttpServletResponse.SC_FORBIDDEN, "Access denied. Please enter your username and password.");
+    }
+}

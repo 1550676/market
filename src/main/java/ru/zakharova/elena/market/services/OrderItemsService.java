@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.zakharova.elena.market.entities.OrderItem;
 import ru.zakharova.elena.market.entities.Product;
-import ru.zakharova.elena.market.entities.dtos.OrderItemDto;
+import ru.zakharova.elena.market.entities.dtos.OrderItemDTO;
 import ru.zakharova.elena.market.repositories.OrderItemRepository;
 
 import java.util.List;
@@ -19,8 +19,8 @@ public class OrderItemsService {
         this.orderItemRepository = orderItemRepository;
     }
 
-    public List<OrderItemDto> mapEntityListToDtoList(List<OrderItem> orderItemList) {
-        return orderItemList.stream().map(OrderItemDto::new).collect(Collectors.toList());
+    public List<OrderItemDTO> mapEntityListToDtoList(List<OrderItem> orderItemList) {
+        return orderItemList.stream().map(OrderItemDTO::new).collect(Collectors.toList());
     }
 
     public void delete(Product product) {

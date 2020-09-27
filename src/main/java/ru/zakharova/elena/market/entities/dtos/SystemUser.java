@@ -1,6 +1,8 @@
 package ru.zakharova.elena.market.entities.dtos;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.zakharova.elena.market.utils.validation.FieldMatch;
@@ -13,8 +15,9 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @FieldMatch(first = "password", second = "matchingPassword", message = "The password fields must match")
 public class SystemUser {
+
     @NotNull(message = "This field is required")
-    @Size(min = 2, message = "Phone number length must be 8 symbols")
+    @Size(min = 2, message = "Phone number length must be 10 symbols")
     private String phone;
 
     @NotNull(message = "This field is required")

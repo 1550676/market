@@ -1,5 +1,9 @@
 package ru.zakharova.elena.market.controllers.rest;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,7 +25,8 @@ import java.util.List;
 @Profile({"ws", "rest", "test"})
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
+@Api("Set of endpoints for operations with jwtToken")
 public class RestAuthController {
     private final UsersService usersService;
     private final JwtTokenUtil jwtTokenUtil;
@@ -34,11 +39,12 @@ public class RestAuthController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) throws Exception {
+    @ApiOperation("Returns jwtToken for the user by userName and password inside an object JwtRequest type.")
+    public ResponseEntity<?> createAuthToken(@RequestBody @ApiParam("Cannot be empty.") JwtRequest authRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(new MarketError(HttpStatus.UNAUTHORIZED.value(), "Incorrect username or password"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new MarketError(HttpStatus.UNAUTHORIZED.value(), "Invalid username or password"), HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = usersService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);

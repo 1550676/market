@@ -5,11 +5,10 @@
         .module('app', ['ngRoute', 'ngStorage'])
         .config(config)
         .run(run)
-        .controller('authController', function ($scope, $http, $localStorage, $location) {
-            const contextPath = 'http://localhost:8189/market';
+        .controller('authController', function ($scope, $http, $localStorage) {
 
             $scope.tryToAuth = function () {
-                $http.post(contextPath + '/auth', $scope.user)
+                $http.post($localStorage.contextPath + '/api/v1/auth', $scope.user)
                     .then(function successCallback(response) {
                         if (response.data.token) {
                             $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
@@ -24,13 +23,12 @@
                             window.location.reload(true);
                             console.log($localStorage.currentUser);
                         }
-                    }, function errorCallback(response) {
-                        window.alert(response.data.message);
+                    }, function errorCallback() {
                         $scope.clearUser();
                     });
             };
 
-            $scope.tryToLogout = function () {
+           $scope.tryToLogout = function () {
                 $scope.clearUser();
                 if ($scope.user.username) {
                     $scope.user.username = null;
@@ -41,7 +39,6 @@
                 if ($scope.user.roleList) {
                     $scope.user.roleList = null;
                 }
-                $location.path("/about");
             };
 
             $scope.clearUser = function () {
@@ -56,6 +53,10 @@
                     return false;
                 }
             };
+
+
+
+
         });
 
     function config($routeProvider, $httpProvider) {
@@ -81,20 +82,23 @@
                 controller: 'orderController'
             })
             .when('/registration', {
-            templateUrl: 'registration/registration.html',
-            controller: 'registrationController'
-        });
+                templateUrl: 'registration/registration.html',
+                controller: 'registrationController'
+            });
 
-        $httpProvider.interceptors.push(function ($q) {
+        $httpProvider.interceptors.push(function ($q, $localStorage) {
             return {
-                'responseError': function (rejection, $localStorage, $http) {
-                    var defer = $q.defer();
-                    if (rejection.status == 401 || rejection.status == 403) {
-                        console.log('error: 401-403 ' + rejection.status);
-                        if (!(localStorage.getItem("localUser") === null)) {
-                            delete $localStorage.currentUser;
-                            $http.defaults.headers.common.Authorization = '';
-                        }
+                'responseError': function (rejection) {
+                    if (rejection.data.message) {
+                        window.alert(rejection.data.message);
+                    } else {
+                        var answer = JSON.parse(rejection.data);
+                        window.alert(answer.message);
+                    }
+                    if (rejection.status === 401 || rejection.status === 403) {
+                        console.log($localStorage.currentUser);
+                        delete $localStorage.currentUser;
+                        window.location.reload(true);
                     }
                     return $q.reject(rejection);
                 }
@@ -103,8 +107,13 @@
     }
 
     function run($rootScope, $http, $localStorage) {
+        $localStorage.contextPath = 'http://localhost:8189/market';
+        // запрашиваем категории
+        $http.get($localStorage.contextPath + "/api/v1/categories")
+            .then(function (response) {
+                $localStorage.categories = response.data;
+            });
         if ($localStorage.currentUser) {
-            console.log($localStorage.currentUser)
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
         }
     }

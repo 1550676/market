@@ -1,5 +1,5 @@
 angular.module('app').controller('registrationController', function ($scope, $http, $location) {
-    const contextPath = 'http://localhost:8189/market';
+
 
     $scope.fieldErrors = [];
     $scope.tryToRegister = function (fieldErrors) {

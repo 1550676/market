@@ -1,4 +1,4 @@
-package ru.zakharova.elena.market.entities.dtos.mappers;
+package ru.zakharova.elena.market.utils.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import ru.zakharova.elena.market.entities.dtos.ProductDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-24T00:28:11+0300",
+    date = "2020-09-25T15:50:22+0300",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 11.0.8 (JetBrains s.r.o.)"
 )
 public class ProductMapperImpl implements ProductMapper {
@@ -25,7 +25,7 @@ public class ProductMapperImpl implements ProductMapper {
 
         Product product = new Product();
 
-        product.setCategories( categoryMapper.toCategoryList( productDTO.getCategoryDTOS() ) );
+        product.setCategories( categoryMapper.toCategoriesList( productDTO.getCategoriesDTOs() ) );
         product.setId( productDTO.getId() );
         product.setTitle( productDTO.getTitle() );
         product.setPrice( productDTO.getPrice() );
@@ -34,13 +34,13 @@ public class ProductMapperImpl implements ProductMapper {
     }
 
     @Override
-    public List<Product> toProductList(List<ProductDTO> productDTOS) {
-        if ( productDTOS == null ) {
+    public List<Product> toProductsList(List<ProductDTO> productsDTOs) {
+        if ( productsDTOs == null ) {
             return null;
         }
 
-        List<Product> list = new ArrayList<Product>( productDTOS.size() );
-        for ( ProductDTO productDTO : productDTOS ) {
+        List<Product> list = new ArrayList<Product>( productsDTOs.size() );
+        for ( ProductDTO productDTO : productsDTOs ) {
             list.add( toProduct( productDTO ) );
         }
 
@@ -55,10 +55,10 @@ public class ProductMapperImpl implements ProductMapper {
 
         ProductDTO productDTO = new ProductDTO();
 
-        if ( productDTO.getCategoryDTOS() != null ) {
-            List<CategoryDTO> list = categoryMapper.fromCategoryList( product.getCategories() );
+        if ( productDTO.getCategoriesDTOs() != null ) {
+            List<CategoryDTO> list = categoryMapper.fromCategoriesList( product.getCategories() );
             if ( list != null ) {
-                productDTO.getCategoryDTOS().addAll( list );
+                productDTO.getCategoriesDTOs().addAll( list );
             }
         }
         productDTO.setId( product.getId() );
@@ -69,7 +69,7 @@ public class ProductMapperImpl implements ProductMapper {
     }
 
     @Override
-    public List<ProductDTO> fromProductList(List<Product> products) {
+    public List<ProductDTO> fromProductsList(List<Product> products) {
         if ( products == null ) {
             return null;
         }

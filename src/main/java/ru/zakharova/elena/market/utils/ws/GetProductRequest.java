@@ -24,26 +24,10 @@ public class GetProductRequest {
     @XmlElement(required = true)
     protected String titlePart;
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
     public String getTitlePart() {
         return titlePart;
     }
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
     public void setTitlePart(String value) {
         this.titlePart = value;
     }

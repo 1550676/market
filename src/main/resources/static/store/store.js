@@ -56,4 +56,10 @@ angular.module('app').controller('storeController', function ($scope, $http, $lo
         });
     };
 
+    $scope.isUserAdmin = function () {
+        if ($localStorage.currentUser) {
+            return $localStorage.currentUser.isAdmin;
+        }
+    };
+
 });

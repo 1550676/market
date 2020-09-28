@@ -48,8 +48,7 @@ public class RestProductsController {
             return new ResponseEntity<>(new MarketError(HttpStatus.NOT_FOUND.value(), "Product not found, id: " + id), HttpStatus.NOT_FOUND);
         }
         Product product = productsService.findById(id).get();
-        ProductDTO productDTO = ProductMapper.PRODUCT_MAPPER.fromProduct(product);
-        return new ResponseEntity<>(productDTO, HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @DeleteMapping
@@ -77,6 +76,7 @@ public class RestProductsController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> modifyProduct(@RequestBody  Product product) {
+        System.out.println("p " + product.getCategories()   );
         if (product.getId() == null || !productsService.existsById(product.getId())) {
             throw new ResourceNotFoundException("Product not found, id: " + product.getId());
         }

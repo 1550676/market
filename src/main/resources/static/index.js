@@ -6,7 +6,6 @@
         .config(config)
         .run(run)
         .controller('authController', function ($scope, $http, $localStorage) {
-
             $scope.tryToAuth = function () {
                 $http.post($localStorage.contextPath + '/api/v1/auth', $scope.user)
                     .then(function successCallback(response) {
@@ -15,12 +14,15 @@
                             $localStorage.currentUser = {
                                 username: $scope.user.username,
                                 token: response.data.token,
-                                roleList: response.data.roleList
+                                roleList : response.data.roleList,
+                                isAdmin: false
                             };
+                            console.log($localStorage.currentUser);
+
+                            $localStorage.currentUser.isAdmin = $scope.isUserAdmin();
                             $scope.user.username = null;
                             $scope.user.password = null;
                             $scope.user.roleList = null;
-                            window.location.reload(true);
                             console.log($localStorage.currentUser);
                         }
                     }, function errorCallback() {
@@ -28,7 +30,15 @@
                     });
             };
 
-           $scope.tryToLogout = function () {
+            $scope.isUserAdmin = function () {
+                if ($localStorage.currentUser && $localStorage.currentUser.roleList.indexOf('ROLE_ADMIN') >= 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+
+            $scope.tryToLogout = function () {
                 $scope.clearUser();
                 if ($scope.user.username) {
                     $scope.user.username = null;
@@ -53,8 +63,6 @@
                     return false;
                 }
             };
-
-
 
 
         });

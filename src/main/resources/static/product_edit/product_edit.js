@@ -5,8 +5,6 @@ angular.module('app').controller('productEditController', function ($scope, $htt
     // если внесение изменений в товар
     if ($routeParams.id != null) {
         $http.get(path + '/' + $routeParams.id).then(function (response) {
-            console.log(response);
-
             $scope.productForm = response.data;
             $scope.productFormCategoriesId = [];
             angular.forEach($scope.productForm.categories, function (item) {

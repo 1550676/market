@@ -29,7 +29,7 @@
     </div>
     <div>
         <button type="submit" ng-click="submitFilters()" class="btn btn-primary">Применить фильтр</button>
-        <button type="submit" ng-click="cancelFilters()" class="btn btn-primary">Отменить фильтр</button>
+        <button type="submit"  ng-click="cancelFilters()" class="btn btn-primary">Отменить фильтр</button>
     </div>
 </form>
 
@@ -54,9 +54,9 @@
             <td>{{p.id}}</td>
             <td>{{p.title}}</td>
             <td>{{p.price}}</td>
-            <td><a href="#!/product_edit?id={{p.id}}">Редактировать</a></td>
+            <td><a ng-show="isUserAdmin()" href="#!/product_edit?id={{p.id}}">Редактировать</a></td>
             <td>
-                <button type="submit" ng-click="deleteProduct(p.id)" class="btn btn-primary">Удалить</button>
+                <button ng-show="isUserAdmin()" type="submit" ng-click="deleteProduct(p.id)" class="btn btn-primary">Удалить</button>
             </td>
             <td>
                 <button type="submit" ng-click="addProductInCart(p.id)" class="btn btn-primary">В корзину</button>

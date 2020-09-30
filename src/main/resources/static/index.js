@@ -17,8 +17,6 @@
                                 roleList : response.data.roleList,
                                 isAdmin: false
                             };
-                            console.log($localStorage.currentUser);
-
                             $localStorage.currentUser.isAdmin = $scope.isUserAdmin();
                             $scope.user.username = null;
                             $scope.user.password = null;

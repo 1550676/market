@@ -1,74 +1,60 @@
 <div class="container">
-    <h2>Регистрация</h2>
-    <p>
-        Раздел находится в разработке
-    </p>
-<!--    <div id="regbox" style="margin-top: 50px;"-->
-<!--         class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">-->
+    <div id="regbox" style="margin-top: 50px;"
+         class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
 
-<!--        <div class="panel panel-primary">-->
+        <div class="panel panel-primary">
 
-<!--            <div class="panel-heading">-->
-<!--                <div class="panel-title">Регистрация</div>-->
-<!--            </div>-->
+            <div class="panel-heading">
+                <div class="panel-title">Регистрация</div>
+            </div>
 
-<!--            <div style="padding-top: 30px" class="panel-body">-->
-<!--                <form name="answerForm" ng-submit="tryToOrderConfirm()"-->
-<!--                      th:object="${systemUser}" method="post" class="form-horizontal">-->
+            <div style="padding-top: 30px" class="panel-body">
+                <form name="answerForm" ng-submit="tryToRegister()"
+                      method="post" class="form-horizontal">
 
-<!--                    <div class="form-group">-->
-<!--                        <div class="col-xs-15">-->
-<!--                            <div th:if="${registrationError != null}">-->
-<!--                                <div class="alert alert-danger col-xs-offset-1 col-xs-10">-->
-<!--                                    ${registrationError}-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="error">{{phone}}</div>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input ng-model="systemUser.phone" placeholder="phone number (*)" class="form-control"/>
+                    </div>
 
-<!--                    <div class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" />-->
-<!--                    <div style="margin-bottom: 25px" class="input-group">-->
-<!--                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>-->
-<!--                        <input th:field="*{phone}" placeholder="phone number (*)" class="form-control"/>-->
-<!--                    </div>-->
+                    <div class="error">{{password}}</div>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" ng-model="systemUser.password" placeholder="password (*)" class="form-control"/>
+                    </div>
 
-<!--                    <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />-->
-<!--                    <div style="margin-bottom: 25px" class="input-group">-->
-<!--                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>-->
-<!--                        <input type="password" th:field="*{password}" placeholder="password (*)" class="form-control"/>-->
-<!--                    </div>-->
+                    <div class="error">{{matchingPassword}}</div>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" ng-model="systemUser.matchingPassword" placeholder="confirm password (*)" class="form-control"/>
+                    </div>
 
-<!--                    <div class="error" th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}" />-->
-<!--                    <div style="margin-bottom: 25px" class="input-group">-->
-<!--                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>-->
-<!--                        <input type="password" th:field="*{matchingPassword}" placeholder="confirm password (*)" class="form-control"/>-->
-<!--                    </div>-->
+                    <div class="error">{{firstName}}</div>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input ng-model="systemUser.firstName" placeholder="first name (*)" class="form-control"/>
+                    </div>
 
-<!--                    <div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" />-->
-<!--                    <div style="margin-bottom: 25px" class="input-group">-->
-<!--                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>-->
-<!--                        <input th:field="*{firstName}" placeholder="first name (*)" class="form-control"/>-->
-<!--                    </div>-->
+                    <div class="error">{{lastName}}</div>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input ng-model="systemUser.lastName" placeholder="last name (*)" class="form-control"/>
+                    </div>
 
-<!--                    <div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" />-->
-<!--                    <div style="margin-bottom: 25px" class="input-group">-->
-<!--                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>-->
-<!--                        <input th:field="*{lastName}" placeholder="last name (*)" class="form-control"/>-->
-<!--                    </div>-->
+                    <div class="error">{{email}}</div>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input ng-model="systemUser.email" placeholder="email (*)" class="form-control"/>
+                    </div>
 
-<!--                    <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" />-->
-<!--                    <div style="margin-bottom: 25px" class="input-group">-->
-<!--                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>-->
-<!--                        <input th:field="*{email}" placeholder="email (*)" class="form-control"/>-->
-<!--                    </div>-->
-
-<!--                    <div style="margin-top: 10px" class="form-group">-->
-<!--                        <div class="col-sm-6 controls">-->
-<!--                            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+                    <div style="margin-top: 10px" class="form-group">
+                        <div class="col-sm-6 controls">
+                            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

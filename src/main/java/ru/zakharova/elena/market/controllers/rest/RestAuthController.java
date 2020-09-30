@@ -39,7 +39,7 @@ public class RestAuthController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation("Returns jwtToken for the user by userName and password inside an object JwtRequest type.")
+    @ApiOperation("Returns jwtToken for the user by his userName and password inside an object of JwtRequest type.")
     public ResponseEntity<?> createAuthToken(@RequestBody @ApiParam("Cannot be empty.") JwtRequest authRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));

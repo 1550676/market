@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import ru.zakharova.elena.market.entities.User;
 import ru.zakharova.elena.market.entities.dtos.SystemUser;
+import ru.zakharova.elena.market.exceptions.MarketError;
 import ru.zakharova.elena.market.services.UsersService;
 import ru.zakharova.elena.market.utils.validation.rest.ValidationErrorDTO;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,13 +37,17 @@ public class RestRegistrationController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public SystemUser processRegistrationForm(@Validated @RequestBody SystemUser systemUser) {
-        Optional<User> existing = usersService.findByPhone(systemUser.getPhone());
-        if (existing.isPresent()) {
-            throw new RuntimeException("User with phone number: [" + systemUser.getPhone() + "] is already exist");
+    public ResponseEntity<?> processRegistrationForm(@RequestBody @Valid SystemUser systemUser) {
+        Optional<User> user = usersService.findByPhone(systemUser.getPhone());
+        if (user.isPresent()) {
+            return new ResponseEntity<>(new MarketError(HttpStatus.CONFLICT.value(), "User with phone number: [" + systemUser.getPhone() + "] is already exist"), HttpStatus.CONFLICT);
+
         }
         usersService.save(systemUser);
-        return systemUser;
+        System.out.println(systemUser.getFirstName()==null);
+        System.out.println(systemUser.getFirstName());
+
+        return new ResponseEntity<>(systemUser, HttpStatus.OK);
         }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

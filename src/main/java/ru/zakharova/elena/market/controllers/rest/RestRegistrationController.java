@@ -41,14 +41,10 @@ public class RestRegistrationController {
         Optional<User> user = usersService.findByPhone(systemUser.getPhone());
         if (user.isPresent()) {
             return new ResponseEntity<>(new MarketError(HttpStatus.CONFLICT.value(), "User with phone number: [" + systemUser.getPhone() + "] is already exist"), HttpStatus.CONFLICT);
-
         }
         usersService.save(systemUser);
-        System.out.println(systemUser.getFirstName()==null);
-        System.out.println(systemUser.getFirstName());
-
         return new ResponseEntity<>(systemUser, HttpStatus.OK);
-        }
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.OK)
@@ -60,7 +56,7 @@ public class RestRegistrationController {
 
     private ValidationErrorDTO processFieldErrors(List<FieldError> fieldErrors) {
         ValidationErrorDTO dto = new ValidationErrorDTO();
-        for (FieldError fieldError: fieldErrors) {
+        for (FieldError fieldError : fieldErrors) {
             dto.addFieldError(fieldError.getField(), fieldError.getDefaultMessage());
         }
         return dto;

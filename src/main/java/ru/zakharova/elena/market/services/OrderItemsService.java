@@ -15,7 +15,7 @@ public class OrderItemsService {
     private OrderItemRepository orderItemRepository;
 
    @Autowired
-    public void setCategoryRepository(OrderItemRepository orderItemRepository) {
+    public void setOrderItemRepository(OrderItemRepository orderItemRepository) {
         this.orderItemRepository = orderItemRepository;
     }
 

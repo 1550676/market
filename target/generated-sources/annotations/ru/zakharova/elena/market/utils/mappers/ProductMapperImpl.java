@@ -10,7 +10,7 @@ import ru.zakharova.elena.market.entities.dtos.ProductDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-25T15:50:22+0300",
+    date = "2020-10-10T16:52:39+0300",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 11.0.8 (JetBrains s.r.o.)"
 )
 public class ProductMapperImpl implements ProductMapper {

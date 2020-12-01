@@ -15,7 +15,7 @@
 <div class="container">
     <div th:replace="~{navigation :: navigation_panel(Cart)}"/>
 
-    <h1 th:text="#{nav.cart}"></h1>
+    <h2>Cart</h2>
     <div th:if="${@cart.items.size() != 0}">
 
         <table class="table table-striped">
@@ -24,7 +24,7 @@
                 <td>Title</td>
                 <td>Price</td>
                 <td>Quantity</td>
-                <td>Actions</td>
+                <td></td>
             </tr>
             </thead>
             <tbody>

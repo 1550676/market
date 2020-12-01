@@ -21,10 +21,10 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <td>Название</td>
-                <td>Цена</td>
-                <td>Количество</td>
-                <td>Операции</td>
+                <td>Title</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Actions</td>
             </tr>
             </thead>
             <tbody>
@@ -36,17 +36,17 @@
                     <span th:text="'  ' + ${i.quantity} + '  '"/>
                     <a class="btn btn-primary" th:href="@{'/cart/add/' + ${i.product.id}}">+</a>
                 </td>
-                <td><a class="btn btn-danger" th:href="@{'/cart/remove/' + ${i.product.id}}">Удалить</a></td>
+                <td><a class="btn btn-danger" th:href="@{'/cart/remove/' + ${i.product.id}}">Delete</a></td>
             </tr>
             </tbody>
         </table>
         <h4 th:text="'Итого: ' + ${@cart.getPrice()} + ' руб.'"></h4>
-        <a class="btn btn-primary" th:href="@{'/orders/create'}" th:if="${@cart.items.size() > 0}">Оформить заказ</a>
+        <a class="btn btn-primary" th:href="@{'/orders/create'}" th:if="${@cart.items.size() > 0}">Place your order</a>
 
     </div>
     <div th:if="${@cart.items.size() == 0}">
-        <h4>На данный момент Ваша корзина пуста.</h4>
-        <a class="btn btn-primary" th:href="@{'/products'}" role="button">Выбрать товары</a>
+        <h4>Your cart is currently empty.</h4>
+        <a class="btn btn-primary" th:href="@{'/products'}" role="button">Back to products choice</a>
     </div>
 
 </div>

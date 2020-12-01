@@ -15,14 +15,14 @@
 <div class="container">
     <div th:replace="~{navigation :: navigation_panel(Cart)}"/>
 
-    <h2>Подтверждение заказа</h2>
+    <h2>Order confirmation</h2>
 
     <table class="table table-striped">
         <thead>
         <tr>
-            <td>Название</td>
-            <td>Количество</td>
-            <td>Цена</td>
+            <td>Title</td>
+            <td>Quantity</td>
+            <td>Price</td>
         </tr>
         </thead>
         <tbody>
@@ -37,14 +37,14 @@
 
     <form th:action="@{'/orders/confirm'}" method="post">
         <div class="form-group">
-            <label>Номер телефона</label>
+            <label>Phone number</label>
             <input th:value="${user.getPhone()}" class="form-control form-control-sm" name="phone">
         </div>
         <div class="form-group">
-            <label>Адрес доставки</label>
+            <label>Delivery address</label>
             <input class="form-control form-control-sm" name="address">
         </div>
-        <button type="submit" class="btn btn-primary">Подтвердить заказ</button>
+        <button type="submit" class="btn btn-primary">Confirm order</button>
     </form>
 </div>
 </body>

@@ -28,6 +28,6 @@ public class RestOrderController {
             User user = usersService.getUserByUsername(principal.getName());
             Order order = new Order(user, cart, principal.getName(), address);
             ordersService.save(order);
-            return new ResponseEntity<>(new MarketError(HttpStatus.OK.value(), "Ваш заказ успешно сформирован!"), HttpStatus.OK);
+            return new ResponseEntity<>(new MarketError(HttpStatus.OK.value(), "Your order was successfully placed!"), HttpStatus.OK);
     }
 }

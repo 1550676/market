@@ -30,16 +30,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#!/about">Главная</a>
+                    <a class="nav-link" href="#!/about">Home page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#!/store">Товары</a>
+                    <a class="nav-link" href="#!/store">Products</a>
                 </li>
                 <li ng-show="isUserAdmin()" class="nav-item">
-                    <a class="nav-link" href="#!/product_edit">Создать товар</a>
+                    <a class="nav-link" href="#!/product_edit">Create product</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#!/cart">Корзина</a>
+                    <a class="nav-link" href="#!/cart">Cart</a>
                 </li>
                 <li class="nav-item">
                     <div class="input-group-prepend">
@@ -50,15 +50,15 @@
                                 <input class="form-control" type="password" name="password" ng-model="user.password"
                                        aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
                                 <button class="btn btn-outline-warning btn-sm" style="margin-left: 10px;"
-                                        type="submit">Войти
+                                        type="submit">Log in
                                 </button>
                             </div>
                         </form>
                         <button class="btn btn-outline-warning btn-sm" style="margin-left: 10px;" ng-hide="isUserLoggedIn()">
-                            <a href="#!/registration">Регистрация</a>
+                            <a href="#!/registration">Registration</a>
                         </button>
                         <button class="btn btn-outline-warning btn-sm" style="margin-top: 5px;"
-                                ng-show="isUserLoggedIn()" ng-click="tryToLogout()">Выйти
+                                ng-show="isUserLoggedIn()" ng-click="tryToLogout()">Log out
                         </button>
                     </div>
                 </li>

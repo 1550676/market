@@ -66,14 +66,14 @@
             <artifactId>maven-jar-plugin</artifactId>
             <version>3.2.0</version>
         </dependency>
-		<!--Обновление без перезапуска-->
+		<!--Live Reload-->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-        <!--Документация для REST-->
+        <!--Documentation for REST-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -105,7 +105,7 @@
             <artifactId>hibernate-validator</artifactId>
             <version>6.1.5.Final</version>
         </dependency>
-        <!--АОП-->
+        <!--Aspect-Oriented Programming with AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
@@ -115,7 +115,7 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
         </dependency>
-        <!--ws-->
+        <!--SOAP Web Service with Spring Boot Starter-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web-services</artifactId>

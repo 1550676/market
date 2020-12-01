@@ -1,26 +1,26 @@
 <div>
 
-<h2>Фильтры:</h2>
+<h2>Filters:</h2>
 <form name="productsFilters" novalidate>
     <div class="form-group">
-        <label>Название</label>
+        <label>Title</label>
         <input id="subTitle" type="text" ng-model="filters.subTitle"
                class="form-control form-control-sm">
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label>Максимальная цена</label>
+            <label>Max price</label>
             <input id="maxPrice" type="number" ng-model="filters.maxPrice"
                    class="form-control form-control-sm">
         </div>
         <div class="form-group col-md-6">
-            <label>Минимальная цена</label>
+            <label>Min price</label>
             <input id="minPrice" type="number" ng-model="filters.minPrice"
                    class="form-control form-control-sm">
         </div>
     </div>
     <div class="form-group">
-        <label>Категории</label>
+        <label>Categories</label>
         <div class="form-check" ng-repeat="c in categories">
             <input id="{{c.title}}" class="form-check-input" type="checkbox"
                    ng-click="selectCategory(c.id)"/>
@@ -28,24 +28,23 @@
         </div>
     </div>
     <div>
-        <button type="submit" ng-click="submitFilters()" class="btn btn-primary">Применить фильтр</button>
-        <button type="submit"  ng-click="cancelFilters()" class="btn btn-primary">Отменить фильтр</button>
+        <button type="submit" ng-click="submitFilters()" class="btn btn-primary">Apply</button>
+        <button type="submit"  ng-click="cancelFilters()" class="btn btn-primary">Reset</button>
     </div>
 </form>
 
 
-<h2>Список товаров:</h2>
+<h2>Products list:</h2>
 <table class="table table-hover" cellpadding="0" cellspacing="0">
     <table class="table table-striped">
         <thead>
         <tr>
             <td>Id</td>
-            <td>Название</td>
-            <td>Цена</td>
+            <td>Title</td>
+            <td>Price</td>
             <td></td>
             <td></td>
             <td></td>
-
         </tr>
         </thead>
         <tbody>
@@ -54,12 +53,12 @@
             <td>{{p.id}}</td>
             <td>{{p.title}}</td>
             <td>{{p.price}}</td>
-            <td><a ng-show="isUserAdmin()" href="#!/product_edit?id={{p.id}}">Редактировать</a></td>
+            <td><a ng-show="isUserAdmin()" href="#!/product_edit?id={{p.id}}">Edit</a></td>
             <td>
-                <button ng-show="isUserAdmin()" type="submit" ng-click="deleteProduct(p.id)" class="btn btn-primary">Удалить</button>
+                <button ng-show="isUserAdmin()" type="submit" ng-click="deleteProduct(p.id)" class="btn btn-primary">Delete</button>
             </td>
             <td>
-                <button type="submit" ng-click="addProductInCart(p.id)" class="btn btn-primary">В корзину</button>
+                <button type="submit" ng-click="addProductInCart(p.id)" class="btn btn-primary">Add to cart</button>
             </td>
 
         </tr>

@@ -15,15 +15,15 @@
 <div class="container">
     <div th:replace="~{navigation :: navigation_panel(Users)}"/>
 
-    <h2>Пользователи</h2>
+    <h2>Users</h2>
 
     <table class="table table-striped">
         <thead>
         <tr>
             <td>Id</td>
-            <td>Телефон</td>
-            <td>Доступ</td>
-            <td>Операции</td>
+            <td>Phone</td>
+            <td>Permitted</td>
+            <td>Actions</td>
         </tr>
         </thead>
         <tbody>
@@ -32,7 +32,7 @@
             <td th:text="${u.id}"></td>
             <td th:text="${u.phone}"></td>
             <td th:text="${u.enable}"></td>
-            <td><a th:href="@{'/users/edit/' + ${u.id}}">Редактировать</a></td>
+            <td><a th:href="@{'/users/edit/' + ${u.id}}">Edit</a></td>
         </tr>
         </tbody>
     </table>
@@ -41,7 +41,7 @@
         <ul class="pagination">
             <li class="page-item" th:classappend="${users.isFirst() ? 'disabled' : ''}">
                 <a class="page-link"
-                   th:href="@{'/products/?p='+ ${users.previousOrFirstPageable().getPageNumber() + 1}}">Назад</a>
+                   th:href="@{'/products/?p='+ ${users.previousOrFirstPageable().getPageNumber() + 1}}">Back</a>
             </li>
 
             <li class="page-item" th:classappend="${users.getNumber() + 1 == i ? 'active' : ''}"
@@ -51,7 +51,7 @@
 
             <li class="page-item" th:classappend="${users.isLast() ? 'disabled' : ''}">
                 <a class="page-link"
-                   th:href="@{'/users/?p='+ ${users.nextOrLastPageable().getPageNumber() + 1}}">Вперед</a>
+                   th:href="@{'/users/?p='+ ${users.nextOrLastPageable().getPageNumber() + 1}}">Forward</a>
             </li>
         </ul>
     </nav>

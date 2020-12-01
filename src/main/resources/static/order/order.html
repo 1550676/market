@@ -1,11 +1,11 @@
 <div class="container">
-    <h2>Подтверждение заказа</h2>
+    <h2>Order confirmation</h2>
     <table class="table table-striped">
         <thead>
         <tr>
-            <td>Название</td>
-            <td>Количество</td>
-            <td>Цена</td>
+            <td>Title</td>
+            <td>Quantity</td>
+            <td>Price</td>
         </tr>
         </thead>
         <tbody>
@@ -17,13 +17,13 @@
         </tr>
         </tbody>
     </table>
-    <h4>Итого выбрано товаров на {{cartPrice}} руб.</h4>
+    <h4>Total cost of products is {{cartPrice}} $</h4>
 
     <form name="answerForm" ng-submit="tryToOrderConfirm()">
         <div class="form-group">
-            <label>Введите адрес доставки</label>
+            <label>Delivery address</label>
             <input class="form-control form-control-sm" name="address" ng-model="address" required>
         </div>
-        <button type="submit" class="btn btn-primary">Подтвердить заказ</button>
+        <button type="submit" class="btn btn-primary">Confirm order</button>
     </form>
 </div>

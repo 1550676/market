@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Внесение данных о товаре</h2>
+    <h2>Input of product data</h2>
     <form name="addProductForm" novalidate>
         <div class="form-group">
             <label>Title</label>
@@ -11,7 +11,7 @@
             <input id="npPrice" type="number" ng-model="productForm.price" class="form-control form-control-sm"/>
         </div>
         <div class="form-group">
-            <label>Категории</label>
+            <label>Categories</label>
             <div ng-repeat="c in categories">
 
                 <div class="form-check">
@@ -20,8 +20,7 @@
                     <label class="form-check-label">{{c.title}}</label>
                 </div>
             </div>
-            <button type="submit" ng-click="createOrUpdateProduct(categories)" class="btn btn-primary">Применить
-                изменения
+            <button type="submit" ng-click="createOrUpdateProduct(categories)" class="btn btn-primary">Save
             </button>
         </div>
     </form>

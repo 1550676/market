@@ -1,13 +1,13 @@
 <div class="container">
     <div ng-hide="isCartEmpty()">
-        <h2>Выбранные товары</h2>
+        <h2>Added products</h2>
         <table class="table table-striped">
             <thead>
             <tr>
-                <td>Название</td>
-                <td>Цена</td>
-                <td>Количество</td>
-                <td>Операции</td>
+                <td>Title</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td></td>
             </tr>
             </thead>
             <tbody>
@@ -23,18 +23,18 @@
                            role="button">+</a>
                     </div>
                 </td>
-                <td><a class="btn btn-danger" ng-click="deleteProductFromCart(orderItemDto.productId)">Удалить</a></td>
+                <td><a class="btn btn-danger" ng-click="deleteProductFromCart(orderItemDto.productId)">Delete</a></td>
             </tr>
             </tbody>
         </table>
 
-        <h4>Итого выбрано товаров на {{cartPrice}} руб.</h4>
+        <h4>Total cost of products is {{cartPrice}} $</h4>
 
-        <a class="btn btn-primary"  href="#!/order" >Оформить заказ</a>
+        <a class="btn btn-primary"  href="#!/order" >Place order</a>
     </div>
     <div ng-show="isCartEmpty()">
-        <h4>На данный момент Вы не выбрали ни одного товара</h4>
-        <a class="btn btn-primary" href="#!/store" role="button">Перейти к выбору товаров</a>
+        <h4>Your cart is currently empty.</h4>
+        <a class="btn btn-primary" href="#!/store" role="button">Back to products choice</a>
     </div>
 
 </div>

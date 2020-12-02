@@ -14,4 +14,5 @@ Profile "thymelife":
 - Demonstration of localization
 
 Profile "ws": demonstrates of SOAP Web Service
+
 Profile "test": loads the test database and performs integration and unit testing for REST API.

@@ -1,15 +1,17 @@
-Интернет-магазин c использованием Spring Boot. Намешано много лишнего в учебных целях, но все работает.
+Standart online market with Spring Boot (registration, authentication, cart, order confirmation).
 
+There are several profiles that were created to demonstrate various features in the app.
 
-
-Profile "rest"
-- Documentation for REST API - swagger.
- - mapstruct, 
+Profile "rest":
+- API Documentation with Swagger
+- Mappings between Java bean types with Mapstruct
 - Aspect-Oriented Programming with AspectJ
- - AngularJS, 
+- Front-and with AngularJS
+- Security with JSONwebtoken
 
-Profile "thymeLife"
+Profile "thymelife":
+- Front-and with ThymeLife
+- Demonstration of localization
 
-Profile "test" loads the test database and performs integration and unit testing for REST API.
-Profile "ws"
-
+Profile "ws": demonstrates of SOAP Web Service
+Profile "test": loads the test database and performs integration and unit testing for REST API.

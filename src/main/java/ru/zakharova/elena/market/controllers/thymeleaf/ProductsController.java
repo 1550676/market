@@ -1,6 +1,7 @@
 package ru.zakharova.elena.market.controllers.thymeleaf;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/products")
+@Profile("thymeleaf")
 public class ProductsController {
     private ProductsService productsService;
     private CategoriesService categoriesService;
@@ -63,8 +65,8 @@ public class ProductsController {
 
     @PostMapping("/edit")
     public String modifyProduct(@ModelAttribute Product product,
-                          @RequestParam(value = "category") List<Long> сategoriesId) {
-        List<Category> categoriesList = categoriesService.getCategoriesByIds(сategoriesId);
+                          @RequestParam(value = "category") List<Long> categoriesId) {
+        List<Category> categoriesList = categoriesService.getCategoriesByIds(categoriesId);
         product.setCategories(categoriesList);
         productsService.saveOrUpdate(product);
         return "redirect:/products";

@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,8 @@ import java.util.stream.Collectors;
 @Component
 @Profile({"ws", "rest", "test"})
 public class JwtTokenUtil {
-    @Value("${jwt.secret}")
+
+    @Value("${SecretForToken}")
     private String secret;
 
     public String getUsernameFromToken(String token) {

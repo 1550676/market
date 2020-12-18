@@ -20,6 +20,7 @@ import java.io.IOException;
 @Component
 @Profile({"ws", "rest", "test"})
 public class JwtRequestFilter extends OncePerRequestFilter {
+
     private UsersService usersService;
     private JwtTokenUtil jwtTokenUtil;
 

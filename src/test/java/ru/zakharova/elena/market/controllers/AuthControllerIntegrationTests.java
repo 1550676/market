@@ -27,7 +27,7 @@ public class AuthControllerIntegrationTests {
         JwtRequest authRequest = new JwtRequest();
         authRequest.setUsername("2");
         authRequest.setPassword("100");
-        ResponseEntity<JwtResponse> response = restTemplate.postForEntity("/auth", new HttpEntity<>(authRequest), JwtResponse.class);
+        ResponseEntity<JwtResponse> response = restTemplate.postForEntity("/api/v1/auth", new HttpEntity<>(authRequest), JwtResponse.class);
         JwtResponse jwtResponse = response.getBody();
         System.out.println(response);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));

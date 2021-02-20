@@ -11,6 +11,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import ru.zakharova.elena.market.entities.Product;
+import ru.zakharova.elena.market.entities.dtos.ProductDTO;
 import ru.zakharova.elena.market.services.ProductsService;
 
 import java.util.List;
@@ -28,14 +29,9 @@ public class ProductsControllerIntegrationTests {
     @Autowired
     private MockMvc mockMvc;
 
-//    @AfterEach
-//    public void resetDb() {
-//        repository.deleteAll();
-//    }
 
     @Test
     @WithMockUser(username = "2", roles = "admin")
-    // @WithAnonymousUser
     @Transactional
     public void givenProduct_whenAdd_thenStatus201andProductReturned() throws Exception {
         Product product = productsService.findById(1L).get();
@@ -48,9 +44,7 @@ public class ProductsControllerIntegrationTests {
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.title").value("Cheese"))
                 .andExpect(jsonPath("$.price").value(320.00))
-                .andExpect(jsonPath("$.categories").isArray())
-                .andExpect(jsonPath("$.items").isEmpty())
-                .andExpect(jsonPath("$.items").isArray());
+                .andExpect(jsonPath("$.categories").isArray());
     }
 
     @Test
@@ -63,9 +57,7 @@ public class ProductsControllerIntegrationTests {
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.title").value("Cheese"))
                 .andExpect(jsonPath("$.price").value(320.00))
-                .andExpect(jsonPath("$.categories").isArray())
-                .andExpect(jsonPath("$.items").isEmpty())
-                .andExpect(jsonPath("$.items").isArray());
+                .andExpect(jsonPath("$.categories").isArray());
     }
 
 
@@ -94,9 +86,7 @@ public class ProductsControllerIntegrationTests {
                 .andExpect(jsonPath("$.id").value("1"))
                 .andExpect(jsonPath("$.title").value("Cheese"))
                 .andExpect(jsonPath("$.price").value(320.00))
-                .andExpect(jsonPath("$.categories").isArray())
-                .andExpect(jsonPath("$.items").isEmpty())
-                .andExpect(jsonPath("$.items").isArray());
+                .andExpect(jsonPath("$.categories").isArray());
     }
 
     @Test
@@ -111,7 +101,7 @@ public class ProductsControllerIntegrationTests {
     @Transactional
     @WithMockUser(username = "2", roles = "admin")
     public void givenNothing_whenGetAllProducts_thenStatus200() throws Exception {
-                List<Product> products = productsService.findAll();
+                List<ProductDTO> products = productsService.findAllDTO();
         mockMvc.perform(
                 get("/api/v1/products"))
                 .andExpect(status().isOk())
